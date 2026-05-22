@@ -1,0 +1,129 @@
+/* notes.css */
+/* ─────────────────────────────────────────────────────────────────────────────
+   Styles for floating sticky notes injected by content.js.
+   All classes are prefixed with "sne-" (Smart Notes Everywhere)
+   to avoid colliding with any website's own CSS.
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Outer note card ────────────────────────────────────────────────────────── */
+.sne-note {
+  /* Positioning: fixed to viewport so it doesn't scroll with the page */
+  position: fixed !important;
+  z-index: 2147483646 !important; /* just below dragging z-index */
+
+  width: 220px;
+  min-height: 140px;
+
+  /* Note background color is controlled via a CSS variable set per note */
+  background-color: var(--note-color, #fff9c4) !important;
+
+  border-radius: 4px !important;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.18),
+    0 0 0 1px rgba(0,0,0,0.06) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  font-family: 'Segoe UI', sans-serif !important;
+  font-size: 13px !important;
+
+  /* Smooth color transitions when user picks a new color */
+  transition: background-color 0.25s ease !important;
+
+  /* Reset any potential host-page interference */
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ── Header (drag handle) ───────────────────────────────────────────────────── */
+.sne-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 6px 8px !important;
+
+  /* Slightly darkened top strip to hint it's draggable */
+  background-color: rgba(0,0,0,0.07) !important;
+  border-radius: 4px 4px 0 0 !important;
+
+  cursor: grab !important;
+  user-select: none !important;
+}
+
+.sne-header:active {
+  cursor: grabbing !important;
+}
+
+/* ── Color picker dots ──────────────────────────────────────────────────────── */
+.sne-dots {
+  display: flex !important;
+  gap: 5px !important;
+}
+
+.sne-dot {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: 1.5px solid rgba(0,0,0,0.15) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  display: inline-block !important;
+}
+
+.sne-dot:hover {
+  transform: scale(1.25) !important;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.2) !important;
+}
+
+.sne-dot.red   { background-color: #ffcdd2 !important; }
+.sne-dot.amber { background-color: #fff9c4 !important; }
+.sne-dot.green { background-color: #c8e6c9 !important; }
+.sne-dot.blue  { background-color: #bbdefb !important; }
+
+/* ── Delete button ──────────────────────────────────────────────────────────── */
+.sne-delete {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: rgba(0,0,0,0.35) !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  transition: color 0.15s, background 0.15s !important;
+}
+
+.sne-delete:hover {
+  color: #c0392b !important;
+  background: rgba(0,0,0,0.08) !important;
+}
+
+/* ── Textarea ────────────────────────────────────────────────────────────────── */
+.sne-textarea {
+  flex: 1 !important;
+  width: 100% !important;
+  min-height: 100px !important;
+
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  resize: vertical !important;
+
+  padding: 8px 10px !important;
+  box-sizing: border-box !important;
+
+  font-family: inherit !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  color: #2c2c2c !important;
+
+  /* Inherit the note's background so text area is seamless */
+  border-radius: 0 0 4px 4px !important;
+}
+
+.sne-textarea::placeholder {
+  color: rgba(0,0,0,0.3) !important;
+  font-style: italic !important;
+}
